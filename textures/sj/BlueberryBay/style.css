@@ -1,0 +1,9 @@
+.dark {
+    background: #0e1f3e !important; 
+}
+#chat.closed #chat-content p.recent {
+    background: #0e1f3eef !important; 
+}
+.dark a, .darker a {
+    color: #88caf3 !important; 
+}
