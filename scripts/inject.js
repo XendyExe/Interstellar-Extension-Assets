@@ -3,7 +3,7 @@ const isTest = location.href.includes("test.drednot.io");
 const split = location.href.split("/")
 
 let inGame = true;
-
+//
 // if (
 //     split[3] != "" &&
 //     split[3] != location.search &&
