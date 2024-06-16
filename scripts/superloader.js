@@ -80,12 +80,14 @@ const inject = async (path) => {
     try {
         let t = await (await fetch("https://interstellar.myvnc.com/ping")).text();
         if (t!=="strawberry girl was here :3") {
+            if (window.SENDING_TO_VANILLA) return;
             alert("Failed to connect to interstellar server. Sending you to vanilla! Please report this to the discord.");
             location.hash = "vanilla";
             location.reload();
         }
     }
     catch {
+        if (window.SENDING_TO_VANILLA) return;
         alert("Failed to connect to interstellar server. Sending you to vanilla! Please report this to the discord.");
         location.hash = "vanilla";
         location.reload();
