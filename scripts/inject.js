@@ -1,6 +1,7 @@
 const isTest = location.href.includes("test.drednot.io");
 
 const split = location.href.split("/")
+
 let inGame = true;
 
 // if (
@@ -13,7 +14,7 @@ let inGame = true;
 // if (split[3] == "invite") inGame = true;
 console.log("Interstellar Content Script // User is ingame? ", inGame);
 
-if (location.hash != "#vanilla" && inGame && !location.origin.includes("test"))
+if (location.hash != "#vanilla" && inGame)
 {
     const URL = chrome.runtime.getURL("");
     inject = (loc, callback=()=>{}, module = false, local = true) => {
@@ -39,9 +40,8 @@ if (location.hash != "#vanilla" && inGame && !location.origin.includes("test"))
                 inject("libs/pixi-sound.js", () => {
                     tag.id = "interstellarTag";
                     inject("scripts/superinjector.js")
-                    tag.setAttribute("interstellarAssetVersion", "3");
+                    tag.setAttribute("interstellarAssetVersion", "4");
                     tag.setAttribute("interstellarURL", URL);
-                    tag.setAttribute("interstellarPreCode", precode);
                 });
             });
         });
@@ -64,13 +64,14 @@ if (location.hash != "#vanilla" && inGame && !location.origin.includes("test"))
             const scriptTag = document.querySelectorAll('script');
             let scriptTagsArray = Array.from(scriptTag);
             scriptTagsArray.forEach(function(tag) {
-                if (tag.innerText.includes("test.drednot.io") || tag.innerHTML.includes("this.props") ||tag.innerText.includes("getSnapshotBeforeUpdate") || tag.innerHTML.includes("MAX_TEAM_LENGTH") || tag.innerText.includes("r(85);")) {
-                    let script = document.createElement("script");
-                    tag.parentElement.appendChild(script);
-                    tag.parentElement.removeChild(tag);
-                    let ScriptTagCode = tag.innerHTML + "";
-                    tag.innerHTML = ""
-                    loadlibs(script, ScriptTagCode);
+                if (tag.innerText.includes("test.drednot.io")) {
+                    tag.id = "OLD_SCRIPT_TAG";
+                    tag.type = "text/plain";
+                    window.onload = () => {
+                        let script = document.createElement("script");
+                        tag.parentElement.appendChild(script);
+                        loadlibs(script);
+                    }
                     observer.disconnect();
                 }
             });

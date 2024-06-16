@@ -25,6 +25,10 @@ button, .btn {
     background: linear-gradient(#d90f60, #4e0011 200%) !important;
 }
 .btn-green {
-    background: linear-gradient(#8d3aa2,#6e2e96 200%) !important;
+    background: linear-gradient(#3aa291,#2e967f 200%) !important;
 }
+.btn-small .btn-green {
+    background: linear-gradient(#3aa291,#2e967f 200%) !important;
+}
+
 

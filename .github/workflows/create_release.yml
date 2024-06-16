@@ -1,0 +1,31 @@
+name: Create Release with Zip
+
+on:
+  push:
+    tags:
+      - 'v*' # Trigger on tags like v1.0.0, v1.2.3, etc.
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Zip repository
+        run: |
+          zip -r repository.zip .
+
+      - name: Create release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          files: repository.zip
+
+      - name: Get the URL of the created release
+        run: echo "Release URL - ${{ steps.create_release.outputs.upload_url }}"

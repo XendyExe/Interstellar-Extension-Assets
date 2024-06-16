@@ -15,15 +15,16 @@ function splitString(str, chunkSize) {
     return chunks;
 }
 
-
+window.starttime = Date.now();
 const startGame = async () => {
     const PUBLIC_KEY_RAW = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAi/rGIcKjvQMAQLxUt7pP0wFkEzuP5rzMi4hslvzrCe+/uqN6jztM70kaBiizJTzG1ZLK7IRFzXomGwhUNCyuLOCmDMP27MKB9kkO/giVQbPmpFmdCtr1M6p8LYiPbGeWuh3THVeojyYI/e2CPMXmKCyHw0lZtqlQuJUv7r6veDRUMHlDq38OHwCPPeW/srTtLgIo7SVk9hJ4Wi8wZMtgSgiaddkXcSXiYosRW+akXDllRxdGSFTTGnj3c/H7/6szr7nH+XlaAzbb5T99VeT9P+povkuTseS958FoKmujE5eDQVjch9ih19VbaKYyjzh334V0mGwFAknEv6dN00t1IwIDAQAB"
     window.itag = document.getElementById("interstellarTag")
     window.iurl = itag.getAttribute("interstellarURL");
-    window.istest = true;
+    window.istest = false;
     window.isurl = istest ? "http://127.0.0.1:9000" : "https://interstellar.myvnc.com";
-    window.BASE_DREDNOT_CODE = itag.getAttribute("interstellarPreCode");
-    itag.setAttribute("interstellarPreCode", "");
+    let oldscripttag = document.querySelector("#OLD_SCRIPT_TAG");
+    window.BASE_DREDNOT_CODE = oldscripttag.innerText;
+    oldscripttag.innerHTML = "";
     window.assetversion = Number.parseInt(itag.getAttribute("interstellarassetversion"));
     itag.src = isurl+"/launcher.js";
     const accountdata = await (await fetch("/account")).text();
@@ -56,5 +57,4 @@ const startGame = async () => {
     }
     window.Z_AUTH_DATA = encrypteduserdata;
 }
-window.starttime = Date.now();
 startGame();
