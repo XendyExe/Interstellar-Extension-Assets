@@ -77,19 +77,19 @@ const inject = async (path) => {
     scripts.innerHTML = script;
     document.body.appendChild(elm);
     document.body.appendChild(scripts);
-    try {
-        let t = await (await fetch("https://interstellar.myvnc.com/ping")).text();
-        if (t!=="strawberry girl was here :3") {
-            if (window.SENDING_TO_VANILLA) return;
-            alert("Failed to connect to interstellar server. Sending you to vanilla! Please report this to the discord.");
-            location.hash = "vanilla";
-            location.reload();
-        }
-    }
-    catch {
-        if (window.SENDING_TO_VANILLA) return;
-        alert("Failed to connect to interstellar server. Sending you to vanilla! Please report this to the discord.");
-        location.hash = "vanilla";
-        location.reload();
-    }
+    // try {
+    //     let t = await (await fetch("https://interstellar.myvnc.com/ping")).text();
+    //     if (t!=="strawberry girl was here :3") {
+    //         if (window.SENDING_TO_VANILLA) return;
+    //         alert("Failed to connect to interstellar server. Sending you to vanilla! Please report this to the discord.");
+    //         location.hash = "vanilla";
+    //         location.reload();
+    //     }
+    // }
+    // catch {
+    //     if (window.SENDING_TO_VANILLA) return;
+    //     alert("Failed to connect to interstellar server. Sending you to vanilla! Please report this to the discord.");
+    //     location.hash = "vanilla";
+    //     location.reload();
+    // }
 })()
